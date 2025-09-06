@@ -1,0 +1,61 @@
+syntax = "v1"
+
+// request
+type (
+	LoginRequest {
+		UserName string `json:"username"`
+		PassWord string `json:"password"`
+	}
+	InLibraryRequest {
+		Name    string   `json:"name"`
+		RoomIds []string `json:"room_ids"`
+	}
+	GetAllSeatInformationRequest {
+		RoomIds []string `json:"room_ids"`
+	}
+)
+
+// response
+type (
+	Response {
+		Code    int         `json:"code"`
+		Message string      `json:"message"`
+		Data    interface{} `json:"data"`
+	}
+	LoginResponse {
+		Cookie []string `json:"cookie"`
+	}
+	GetRoomIdsResponse {
+		RoomIds []string `json:"room_ids"`
+	}
+	InLibraryResponse {
+		IsInLibrary bool   `json:"is_in_library"`
+		Area        string `json:"area"`
+		Start       string `json:"start"`
+		End         string `json:"end"`
+	}
+	SeatInfo {
+		IsOccupied bool   `json:"is_occupied"`
+		Owner      string `json:"owner"`
+		Start      string `json:"start"`
+		End        string `json:"end"`
+	}
+	AllSeatInfo {
+		SeatInfos []SeatInfo `json:"seat_infos"`
+	}
+)
+
+service libray {
+	@handler Login
+	post /library/login (LoginRequest) returns (Response)
+
+	@handler GetRoomIds
+	get /library/roomids returns (Response)
+
+	@handler InLibrary
+	post /library/inlibrary (InLibraryRequest) returns (Response)
+
+	@handler GetAllSeatInformation
+	post /library/seatinfo (GetAllSeatInformationRequest) returns (Response)
+}
+
