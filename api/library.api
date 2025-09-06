@@ -45,7 +45,7 @@ type (
 	}
 )
 
-service libray {
+service library {
 	@handler Login
 	post /library/login (LoginRequest) returns (Response)
 

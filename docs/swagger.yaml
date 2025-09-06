@@ -1,0 +1,146 @@
+definitions:
+  types.InLibraryRequest:
+    properties:
+      name:
+        type: string
+      room_ids:
+        items:
+          type: string
+        type: array
+    type: object
+  types.LoginRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  types.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /library/inlibrary:
+    post:
+      consumes:
+      - application/json
+      description: 借助用户Cookie信息查询用户当前是否在图书馆内
+      parameters:
+      - description: 用户认证Cookie
+        in: header
+        name: Cookie
+        required: true
+        type: string
+      - description: 请求参数
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/types.InLibraryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 查询成功返回用户在馆状态
+          schema:
+            $ref: '#/definitions/types.Response'
+        "400":
+          description: 请求参数错误
+          schema:
+            $ref: '#/definitions/types.Response'
+        "401":
+          description: 未授权访问
+          schema:
+            type: string
+      summary: 查询用户是否在图书馆
+      tags:
+      - 用户
+  /library/login:
+    post:
+      consumes:
+      - application/json
+      description: 用户通过学号和密码进行登录，获取访问令牌
+      parameters:
+      - description: 登录请求参数
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/types.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 登录成功返回信息
+          schema:
+            $ref: '#/definitions/types.Response'
+        "400":
+          description: 登录失败返回信息
+          schema:
+            $ref: '#/definitions/types.Response'
+      summary: 用户登录
+      tags:
+      - 用户
+  /library/roomids:
+    get:
+      consumes:
+      - application/json
+      description: 获取系统中所有活跃的房间ID列表
+      parameters:
+      - description: 用户认证Cookie
+        in: header
+        name: Cookie
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功返回房间ID列表
+          schema:
+            $ref: '#/definitions/types.Response'
+        "400":
+          description: 请求参数错误
+          schema:
+            $ref: '#/definitions/types.Response'
+        "401":
+          description: 未授权访问
+          schema:
+            type: string
+      summary: 获取所有房间ID
+      tags:
+      - 图书馆信息
+  /library/seatinfo:
+    post:
+      consumes:
+      - application/json
+      description: 获取系统中所有座位的信息
+      parameters:
+      - description: 用户认证Cookie
+        in: header
+        name: Cookie
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 返回所有座位信息
+          schema:
+            $ref: '#/definitions/types.Response'
+        "401":
+          description: 用户未授权
+          schema:
+            type: string
+        "500":
+          description: 服务器内部错误
+          schema:
+            type: string
+      summary: 获取所有座位信息
+      tags:
+      - 图书馆信息
+swagger: "2.0"

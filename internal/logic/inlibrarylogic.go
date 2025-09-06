@@ -28,7 +28,7 @@ func NewInLibraryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *InLibra
 func (l *InLibraryLogic) InLibrary(req *types.InLibraryRequest, cookie string) (resp *types.Response, err error) {
 	if cookie == "" {
 		return &types.Response{
-			Code:    400,
+			Code:    401,
 			Message: "cookie 不能为空",
 		}, nil
 	}
@@ -66,7 +66,7 @@ func (l *InLibraryLogic) InLibrary(req *types.InLibraryRequest, cookie string) (
 	} else {
 		fmt.Println("不在图书馆")
 		return &types.Response{
-			Code:    400,
+			Code:    200,
 			Message: "不在图书馆",
 			Data: types.InLibraryResponse{
 				IsInLibrary: false,

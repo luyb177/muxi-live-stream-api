@@ -26,7 +26,7 @@ func NewGetRoomIdsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetRoo
 func (l *GetRoomIdsLogic) GetRoomIds(cookie string) (resp *types.Response, err error) {
 	if cookie == "" {
 		return &types.Response{
-			Code:    400,
+			Code:    401,
 			Message: "cookie 不能为空",
 		}, nil
 	}
