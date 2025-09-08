@@ -16,6 +16,7 @@ import (
 // @Accept json
 // @Produce json
 // @Param Cookie header string false "用户认证Cookie"
+// @Param req body types.GetAllSeatInformationRequest true "请求参数"
 // @Success 200 {object} types.Response "返回所有座位信息"
 // @Failure 401 {string} string "用户未授权"
 // @Failure 500 {string} string "服务器内部错误"

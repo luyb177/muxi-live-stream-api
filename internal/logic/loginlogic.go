@@ -99,7 +99,8 @@ func (l *LoginLogic) Login(req *types.LoginRequest) (resp *types.Response, err e
 	}
 	defer response.Body.Close()
 
-	cookies := response.Cookies()
+	u, _ := url.Parse("http://kjyy.ccnu.edu.cn/ClientWeb/pro/ajax/device.aspx")
+	cookies := client.Jar.Cookies(u)
 	cookieString := make([]string, len(cookies))
 	for i, c := range cookies {
 		cookieString[i] = c.String()
