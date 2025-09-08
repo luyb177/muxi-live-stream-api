@@ -27,7 +27,7 @@ func NewGetAllSeatInformationLogic(ctx context.Context, svcCtx *svc.ServiceConte
 func (l *GetAllSeatInformationLogic) GetAllSeatInformation(req *types.GetAllSeatInformationRequest, cookie string) (resp *types.Response, err error) {
 	if cookie == "" {
 		return &types.Response{
-			Code:    400,
+			Code:    401,
 			Message: "cookie 不能为空",
 		}, nil
 	}

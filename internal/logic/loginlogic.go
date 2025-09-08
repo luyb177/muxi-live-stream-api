@@ -101,6 +101,12 @@ func (l *LoginLogic) Login(req *types.LoginRequest) (resp *types.Response, err e
 
 	u, _ := url.Parse("http://kjyy.ccnu.edu.cn/ClientWeb/pro/ajax/device.aspx")
 	cookies := client.Jar.Cookies(u)
+	if cookies == nil {
+		return &types.Response{
+			Code:    400,
+			Message: "登录失败",
+		}, nil
+	}
 	cookieString := make([]string, len(cookies))
 	for i, c := range cookies {
 		cookieString[i] = c.String()
