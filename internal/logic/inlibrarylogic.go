@@ -51,10 +51,10 @@ func (l *InLibraryLogic) InLibrary(req *types.InLibraryRequest, cookie string) (
 
 	ot := grabber.IsInLibrary(req.Name, cookie)
 	if ot != nil {
-		fmt.Printf("在图书馆的%s，%s - %s\n", ot.Title, ot.Start, ot.End)
+		fmt.Printf("%s 在图书馆的%s，%s - %s\n", req.Name, ot.Title, ot.Start, ot.End)
 		return &types.Response{
 			Code:    200,
-			Message: fmt.Sprintf("在图书馆的%s，%s - %s\n", ot.Title, ot.Start, ot.End),
+			Message: fmt.Sprintf("%s 在图书馆的%s，%s - %s", req.Name, ot.Title, ot.Start, ot.End),
 			Data: types.InLibraryResponse{
 				IsInLibrary: true,
 				Area:        ot.Title,
