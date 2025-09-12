@@ -29,12 +29,14 @@ type (
 		RoomIds []string `json:"room_ids"`
 	}
 	InLibraryResponse {
+		Seat        string `json:"seat"`
 		IsInLibrary bool   `json:"is_in_library"`
 		Area        string `json:"area"`
 		Start       string `json:"start"`
 		End         string `json:"end"`
 	}
 	SeatInfo {
+		Seat       string `json:"seat"`
 		IsOccupied bool   `json:"is_occupied"`
 		Owner      string `json:"owner"`
 		Start      string `json:"start"`
