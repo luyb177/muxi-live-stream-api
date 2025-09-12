@@ -251,6 +251,7 @@ func (g *Grabber) SearchAllSeats(cookieHeader string) *types.AllSeatInfo {
 					fmt.Println()
 					fmt.Println()
 					allSeats.SeatInfos = append(allSeats.SeatInfos, types.SeatInfo{
+						Seat: locationInfo.Title,
 						IsOccupied: true,
 						Owner:      student.Owner,
 						Start:      student.Start,
@@ -262,6 +263,7 @@ func (g *Grabber) SearchAllSeats(cookieHeader string) *types.AllSeatInfo {
 				fmt.Println()
 				fmt.Println()
 				allSeats.SeatInfos = append(allSeats.SeatInfos, types.SeatInfo{
+					Seat: locationInfo.Title,
 					IsOccupied: false,
 				})
 			}
