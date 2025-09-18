@@ -3,7 +3,8 @@ FROM golang:alpine AS builder
 LABEL stage=gobuilder
 
 ENV CGO_ENABLED 0
-
+# 添加代理
+ENV GOPROXY=https://goproxy.cn,direct
 
 RUN apk update --no-cache && apk add --no-cache tzdata
 
@@ -14,7 +15,7 @@ ADD go.sum .
 RUN go mod download
 COPY . .
 
-RUN go build -ldflags="-s -w" -o /app/libray libray.go
+RUN go build -ldflags="-s -w" -o /app/library library.go
 
 
 FROM scratch
@@ -24,7 +25,7 @@ COPY --from=builder /usr/share/zoneinfo/Asia/Shanghai /usr/share/zoneinfo/Asia/S
 ENV TZ Asia/Shanghai
 
 WORKDIR /app
-COPY --from=builder /app/libray /app/libray
+COPY --from=builder /app/library /app/library
 COPY ./etc /app/etc
 
-CMD ["./libray", "-f", "etc/libray.yaml"]
+CMD ["./library", "-f", "etc/library.yaml"]
