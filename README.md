@@ -91,6 +91,7 @@
   "code": 200,
   "message": "xxx 在图书馆的xxx，09:40 - 13:55\n",
   "data": {
+    "seat":"xxx",
     "is_in_library": true,
     "area": "xxx",
     "start": "09:40",
@@ -128,12 +129,14 @@
   "data": {
     "seat_infos": [
       {
+        "seat":"xxx",
         "is_occupied": false,
         "owner": "",
         "start": "",
         "end": ""
       },
       {
+        "seat":"xxx",
         "is_occupied": true,
         "owner": "xxx",
         "start": "2025-09-08 08:38",
